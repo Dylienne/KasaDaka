@@ -2,11 +2,8 @@
 <vxml version = "2.1" >  
 	<menu id="main" dtmf ="true">
     		<prompt>
-            		Welcome to Mali Farmer Care. Please choose a language.
-
-            		For English, press 1.
-			For French, press 2.
-			For Bambara, press 3.
+    	<audio src ="intro.wav"/>
+	<audio src ="engLang.wav"/>
 		</prompt>       			
 		<choice dtmf="1" next="#options" />
 		<choice dtmf="2" next="#options" />
@@ -15,10 +12,10 @@
 
 	<menu id="options" dtmf="true">
 		<prompt>
-			What is your alert about?
-			For farming and crops, press 1.
-			For endangerment of cattle, press 2.
-			For human destruction, press 3.
+			<audio src ="AlertQuestion.wav"/>
+			<audio src ="FarmCrops.wav"/>
+			<audio src ="Cattles.wav"/>
+			<audio src ="HumanDestruction.wav"/>
 		</prompt>
 		<choice dtmf="1" next="#farming" />
 		<choice dtmf="2" next="#cattle" />
@@ -27,9 +24,9 @@
 
 	<menu id="farming" dtmf="true">
 		<prompt>
-			For plague or pesticides, press 1.
-			For weather conditions, press 2.
-			For tip or remarks, press 3.
+			<audio src ="PoP.wav"/>
+			<audio src ="WC.wav"/>
+			<audio src ="ToP.wav"/>
 		</prompt>
 		<choice dtmf="1" next="#record" />
 		<choice dtmf="2" next="#record" />
@@ -38,9 +35,9 @@
 
 	<menu id="cattle" dtmf="true">
 		<prompt>
-			For animal disease, press 1.
-			For help for animal, press 2.
-			For tip or remarks, press 3.
+			<audio src ="2AnimalDisease.wav"/>
+			<audio src ="2HelpForAnimal.wav"/>
+			<audio src ="ToP.wav"/>
 		</prompt>	
 		<choice dtmf="1" next="#record" />
 		<choice dtmf="2" next="#record" />
@@ -49,9 +46,9 @@
 
 	<menu id="human" dtmf="true">
 		<prompt>
-			For destruction of natural resources, press 1.
-			For violence or abuse, press 2.
-			For theft, press 3.
+			<audio src ="DestrNat.wav"/>
+			<audio src ="violenceOrAbuse.wav"/>
+			<audio src ="theft.wav"/>		
 		</prompt>
 		<choice dtmf="1" next="#record" />
 		<choice dtmf="2" next="#record" />
@@ -62,10 +59,10 @@
 		<record  name="msg" beep="true" maxtime="30s"
        		finalsilence="4000ms" dtmfterm="true" type="audio/x-wav">
        			<prompt timeout="5s">
-         			Record a message after the beep.
+         			<audio src ="RAB.wav"/>
        			</prompt>
        			<noinput>
-         			I didn't hear anything, please try again.
+         			<audio src ="Nope.wav"/>
        			</noinput>
      		</record>
  	</form>
