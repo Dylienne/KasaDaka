@@ -1,10 +1,73 @@
-<?xml version="1.0"?>
-<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml">
- <form>
-  <block>
-   <prompt>
-    <audio src="helloworld.wav"/>
-   </prompt>
-  </block>
- </form>
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" >  
+	<menu id="main" dtmf ="true">
+    		<prompt>
+            		Welcome to Mali Farmer Care. Please choose a language.
+
+            		For English, press 1.
+			For French, press 2.
+			For Bambara, press 3.
+		</prompt>       			
+		<choice dtmf="1" next="#options" />
+		<choice dtmf="2" next="#options" />
+		<choice dtmf="3" next="#options" />
+	</menu>
+
+	<menu id="options" dtmf="true">
+		<prompt>
+			What is your alert about?
+			For farming and crops, press 1.
+			For endangerment of cattle, press 2.
+			For human destruction, press 3.
+		</prompt>
+		<choice dtmf="1" next="#farming" />
+		<choice dtmf="2" next="#cattle" />
+		<choice dtmf="3" next="#human" />
+	</menu>
+
+	<menu id="farming" dtmf="true">
+		<prompt>
+			For plague or pesticides, press 1.
+			For weather conditions, press 2.
+			For tip or remarks, press 3.
+		</prompt>
+		<choice dtmf="1" next="#record" />
+		<choice dtmf="2" next="#record" />
+		<choice dtmf="3" next="#record" />
+	</menu>
+
+	<menu id="cattle" dtmf="true">
+		<prompt>
+			For animal disease, press 1.
+			For help for animal, press 2.
+			For tip or remarks, press 3.
+		</prompt>	
+		<choice dtmf="1" next="#record" />
+		<choice dtmf="2" next="#record" />
+		<choice dtmf="3" next="#record" />
+	</menu>
+
+	<menu id="human" dtmf="true">
+		<prompt>
+			For destruction of natural resources, press 1.
+			For violence or abuse, press 2.
+			For theft, press 3.
+		</prompt>
+		<choice dtmf="1" next="#record" />
+		<choice dtmf="2" next="#record" />
+		<choice dtmf="3" next="#record" />
+	</menu>
+
+	<form id="record">
+		<record  name="msg" beep="true" maxtime="30s"
+       		finalsilence="4000ms" dtmfterm="true" type="audio/x-wav">
+       			<prompt timeout="5s">
+         			Record a message after the beep.
+       			</prompt>
+       			<noinput>
+         			I didn't hear anything, please try again.
+       			</noinput>
+     		</record>
+ 	</form>
+
 </vxml>
