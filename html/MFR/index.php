@@ -6,9 +6,7 @@ fwrite($fp, $req_dump);
 fclose($fp);
 
 $recAudio = '/tmp/cacheContent/record_1_1.WAV';
-$storeAudio = '/tmp/cacheContent/saved'.date("Y/m/d");
-
-rename($recAudio, $storeAudio);
+$storeAudio = '/home/pi/KasaDaka/recordings/saved'.date("Y/m/d");
 
 if(!copy($recAudio, $storeAudio)){
 	echo "failed to copy $recAudio";
