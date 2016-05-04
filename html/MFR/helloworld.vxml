@@ -99,29 +99,28 @@
 	</menu>
 
 	<form id="record">
-		<record  name="message" beep="true" maxtime="30s"
-       		finalsilence="5000ms" dtmfterm="true"  >
-       			<prompt bargein = "false">
-         			<audio src ="RAB.wav"/>
+		<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
+       			<prompt bargein="false">
+         			<audio src="RAB.wav"/>
        			</prompt>
 			
 		</record>
-		 <block>
-            		<submit next="index.php" method="post"/>
+		<block>
+            		<submit next="index.php" enctype="multipart/form-data"  method="post" namelist="message" />
+
+
+
 		</block> 		
 	</form>
 
- 		<form id="Frecord">
-		<record  name="message" beep="true" maxtime="30s" dtmfterm="true" type="audio/x-wav">
+ 	<form id="Frecord">
+		<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
        			<prompt timeout="5s">
-         			<audio src ="RecordMessageFrench.wav"/>
+         			<audio src="RecordMessageFrench.wav"/>
        			</prompt>
 			<noinput>
-         			<audio src ="DidNotHearFrench.wav"/>
-       			</noinput>
-       			
+         			<audio src="DidNotHearFrench.wav"/>
+       			</noinput>			
      		</record>
-		
  	</form>
-
 </vxml>
