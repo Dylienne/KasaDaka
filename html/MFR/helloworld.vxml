@@ -106,10 +106,7 @@
 			
 		</record>
 		<block>
-            		<submit next="index.php" enctype="multipart/form-data"  method="post" namelist="message" />
-
-
-
+            		<submit next="index.php" enctype="multipart/form-data"  method="post" name="message" />
 		</block> 		
 	</form>
 
