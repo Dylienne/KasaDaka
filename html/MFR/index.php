@@ -1,6 +1,6 @@
 <?php
 
-$req_dump = print_r($_POST['message'], TRUE);
+#$req_dump = print_r($_POST['message'], TRUE);
 
 if(file_exists('/tmp/request.log')){
     unlink('/tmp/request.log');
@@ -23,7 +23,7 @@ switch($_FILES['message']['error']){
 	fwrite($fp, "\ncheck path destiny: ".$success_path_d);
 
 	fwrite($fp, "\ncheck file name: ".$_FILES['message']['name']);
-	$success=move_uploaded_file($_FILES['message']['tmp_name'], $new_path . 'record' . date("Y/m/d h:i:sa") . '.WAV');
+	$success=move_uploaded_file($_FILES['message']['tmp_name'], $new_path . 'record' . date("Y_m_d_h_i_sa") . '.WAV');
 	fwrite($fp, "\ncopy success: ".$success);
 	$prompt = 'Thanks, your message has been saved.';
         break;
