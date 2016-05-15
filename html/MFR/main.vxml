@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version = "2.1" > 
 <var name="callerID" expr="session.callerid" />
+<var name="choice_user" />
 
 <menu id="main" dtmf ="true">
 	<prompt>
@@ -42,9 +43,9 @@
 		<audio src ="WC.wav"/>
 		<audio src ="ToP.wav"/>
 	</prompt>
-	<choice dtmf="1" next="#record" />
-	<choice dtmf="2" next="#record" />
-	<choice dtmf="3" next="#record" />
+	<choice dtmf="1" event="choice" message="Pesticides" />
+	<choice dtmf="2" event="choice" message="WeatherConditions" />
+	<choice dtmf="3" event="choice" message="TipsOrRemarksFarming" />
 </menu>
 	
 <menu id="Ffarming" dtmf="true">
@@ -53,9 +54,9 @@
 		<audio src ="FrenchWeatherConditions.wav"/>
 		<audio src ="TipOrRemarksFrench.wav"/>
 	</prompt>
-	<choice dtmf="1" next="#Frecord" />
-	<choice dtmf="2" next="#Frecord" />
-	<choice dtmf="3" next="#Frecord" />
+	<choice dtmf="1" event="Fchoice" message="Pesticides" />
+	<choice dtmf="2" event="Fchoice" message="WeatherConditions" />
+	<choice dtmf="3" event="Fchoice" message="TipsOrRemarksFarming" />
 </menu>
 
 <menu id="cattle" dtmf="true">
@@ -64,9 +65,9 @@
 		<audio src ="2HelpForAnimal.wav"/>
 		<audio src ="ToP.wav"/>
 	</prompt>	
-	<choice dtmf="1" next="#record" />
-	<choice dtmf="2" next="#record" />
-	<choice dtmf="3" next="#record" />
+	<choice dtmf="1" event="choice" message="AnimalDisease" />
+	<choice dtmf="2" event="choice" message="AnimalHelp" />
+	<choice dtmf="3" event="choice" message="TipsOrRemarksCattle" />
 </menu>
 
 <menu id="Fcattle" dtmf="true">
@@ -75,9 +76,9 @@
 		<audio src ="AnimalHelpFrench.wav"/>
 		<audio src ="TipOrRemarksFrench.wav"/>
 	</prompt>	
-	<choice dtmf="1" next="#Frecord" />
-	<choice dtmf="2" next="#Frecord" />
-	<choice dtmf="3" next="#Frecord" />
+	<choice dtmf="1" event="Fchoice" message="AnimalDisease" />
+	<choice dtmf="2" event="Fchoice" message="AnimalHelp" />
+	<choice dtmf="3" event="Fchoice" message="TipsOrRemarksCattle" />
 </menu>
 
 <menu id="human" dtmf="true">
@@ -86,9 +87,9 @@
 		<audio src ="violenceOrAbuse.wav"/>
 		<audio src ="theft.wav"/>		
 	</prompt>
-	<choice dtmf="1" next="#record" />
-	<choice dtmf="2" next="#record" />
-	<choice dtmf="3" next="#record" />
+	<choice dtmf="1" event="choice" message="DestructionNatural" />
+	<choice dtmf="2" event="choice" message="ViolenceOrAbuse" />
+	<choice dtmf="3" event="choice" message="Theft" />
 </menu>
 
 <menu id="Fhuman" dtmf="true">
@@ -97,10 +98,22 @@
 		<audio src ="ViolenceOrAbuseFrench.wav"/>
 		<audio src ="TheftFrench.wav"/>		
 	</prompt>
-	<choice dtmf="1" next="#Frecord" />
-	<choice dtmf="2" next="#Frecord" />
-	<choice dtmf="3" next="#Frecord" />
+	<choice dtmf="1" event="Fchoice" message="DestructionNatural" />
+	<choice dtmf="2" event="Fchoice" message="ViolenceOrAbuse" />
+	<choice dtmf="3" event="Fchoice" message="Theft" />
 </menu>
+
+
+<catch cond="true" event="choice">
+	<assign name="choice_user" expr="_message" />
+	<goto next="#record" />
+</catch>
+
+<catch cond="true" event="Fchoice">
+	<assign name="choice_user" expr="_message" />
+	<goto next="#Frecord" />
+</catch>
+
 
 <form id="record">
 	<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
@@ -112,7 +125,8 @@
 		<var name="language" expr="'english'" />
 		<log expr="'*****callerID-english=' + callerID + '*****'" />
 		<log expr="'*****language-english=' + language + '*****'" />
-    		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language" />
+		<log expr="'*****choice-of-user=' + choice_user + '*****'" />
+    		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language choice_user" />
 	</block> 		
 </form>
 
@@ -128,7 +142,7 @@
 	<block>
 		<var name="language" expr="'french'" />
 		<log expr="'*****callerID-french=' + callerID + '*****'" />
-    		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language" />
+    		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language choice_user" />
 	</block>
 </form>
 </vxml>

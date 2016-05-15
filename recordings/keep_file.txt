@@ -1,0 +1,1 @@
+It prevents the git from deleting the folder from the repository
