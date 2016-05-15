@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" > 
+<var name="callerID" expr="session.callerid" />
+
+<menu id="main" dtmf ="true">
+	<prompt>
+	    	<audio src ="intro.wav"/>
+		<audio src ="engLang.wav"/>
+		<audio src ="FrenchMenu.wav"/>
+	</prompt>       			
+	<choice dtmf="1" next="#options"/>
+	<choice dtmf="2" next="#Foptions"/>
+</menu>
+
+<menu id="options" dtmf="true">
+	<prompt>
+		<audio src ="AlertQuestion.wav"/>
+		<audio src ="FarmCrops.wav"/>
+		<audio src ="Cattles.wav"/>
+		<audio src ="HumanDestruction.wav"/>
+	</prompt>
+	<choice dtmf="1" next="#farming" />
+	<choice dtmf="2" next="#cattle" />
+	<choice dtmf="3" next="#human" />
+</menu>
+	
+<menu id="Foptions" dtmf="true">
+	<prompt>
+		<audio src ="AlertQuestionFrench.wav"/>
+		<audio src ="FarmingAndCropsFrench.wav"/>
+		<audio src ="Endagerment.wav"/>
+		<audio src ="HumanDest.wav"/>
+	</prompt>
+	<choice dtmf="1" next="#Ffarming" />
+	<choice dtmf="2" next="#Fcattle" />
+	<choice dtmf="3" next="#Fhuman" />
+</menu>
+
+<menu id="farming" dtmf="true">
+	<prompt>
+		<audio src ="PoP.wav"/>
+		<audio src ="WC.wav"/>
+		<audio src ="ToP.wav"/>
+	</prompt>
+	<choice dtmf="1" next="#record" />
+	<choice dtmf="2" next="#record" />
+	<choice dtmf="3" next="#record" />
+</menu>
+	
+<menu id="Ffarming" dtmf="true">
+	<prompt>
+		<audio src ="PesticidesFrench.wav"/>
+		<audio src ="FrenchWeatherConditions.wav"/>
+		<audio src ="TipOrRemarksFrench.wav"/>
+	</prompt>
+	<choice dtmf="1" next="#Frecord" />
+	<choice dtmf="2" next="#Frecord" />
+	<choice dtmf="3" next="#Frecord" />
+</menu>
+
+<menu id="cattle" dtmf="true">
+	<prompt>
+		<audio src ="2AnimalDisease.wav"/>
+		<audio src ="2HelpForAnimal.wav"/>
+		<audio src ="ToP.wav"/>
+	</prompt>	
+	<choice dtmf="1" next="#record" />
+	<choice dtmf="2" next="#record" />
+	<choice dtmf="3" next="#record" />
+</menu>
+
+<menu id="Fcattle" dtmf="true">
+	<prompt>
+		<audio src ="AnimalDiseaseFrench.wav"/>
+		<audio src ="AnimalHelpFrench.wav"/>
+		<audio src ="TipOrRemarksFrench.wav"/>
+	</prompt>	
+	<choice dtmf="1" next="#Frecord" />
+	<choice dtmf="2" next="#Frecord" />
+	<choice dtmf="3" next="#Frecord" />
+</menu>
+
+<menu id="human" dtmf="true">
+	<prompt>
+		<audio src ="DestrNat.wav"/>
+		<audio src ="violenceOrAbuse.wav"/>
+		<audio src ="theft.wav"/>		
+	</prompt>
+	<choice dtmf="1" next="#record" />
+	<choice dtmf="2" next="#record" />
+	<choice dtmf="3" next="#record" />
+</menu>
+
+<menu id="Fhuman" dtmf="true">
+	<prompt>
+		<audio src ="DestructionNaturalFrench.wav"/>
+		<audio src ="ViolenceOrAbuseFrench.wav"/>
+		<audio src ="TheftFrench.wav"/>		
+	</prompt>
+	<choice dtmf="1" next="#Frecord" />
+	<choice dtmf="2" next="#Frecord" />
+	<choice dtmf="3" next="#Frecord" />
+</menu>
+
+<form id="record">
+	<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
+		<prompt bargein="false">
+ 			<audio src="RAB.wav"/>
+		</prompt>	
+	</record>
+	<block>
+		<var name="language" expr="'english'" />
+		<log expr="'*****callerID-english=' + callerID + '*****'" />
+		<log expr="'*****language-english=' + language + '*****'" />
+    		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language" />
+	</block> 		
+</form>
+
+<form id="Frecord">
+	<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
+		<prompt timeout="5s">
+ 			<audio src="RecordMessageFrench.wav"/>
+		</prompt>
+		<noinput>
+ 			<audio src="DidNotHearFrench.wav"/>
+		</noinput>			
+	</record>
+	<block>
+		<var name="language" expr="'french'" />
+		<log expr="'*****callerID-french=' + callerID + '*****'" />
+    		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language" />
+	</block>
+</form>
+</vxml>
