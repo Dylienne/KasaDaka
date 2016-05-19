@@ -121,13 +121,19 @@
  			<audio src="RAB.wav"/>
 		</prompt>	
 	</record>
+	<filled>
+		<prompt xml:lang="en-US"> <!-- Play the voiceMessage buffer -->
+			<audio expr="message"/>
+		</prompt>
+		<!-- <goto next="#main_menu"/> -->
+	</filled>
 	<block>
 		<var name="language" expr="'english'" />
 		<log expr="'*****callerID-english=' + callerID + '*****'" />
 		<log expr="'*****language-english=' + language + '*****'" />
 		<log expr="'*****choice-of-user=' + choice_user + '*****'" />
     		<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language choice_user" />
-	</block> 		
+	</block>		
 </form>
 
 <form id="Frecord">
@@ -139,6 +145,12 @@
  			<audio src="DidNotHearFrench.wav"/>
 		</noinput>			
 	</record>
+	<filled>
+		<prompt> <!-- Play the voiceMessage buffer -->
+			<audio expr="message"/>
+		</prompt>
+		<!-- <goto next="#main_menu"/> -->
+	</filled>
 	<block>
 		<var name="language" expr="'french'" />
 		<log expr="'*****callerID-french=' + callerID + '*****'" />
