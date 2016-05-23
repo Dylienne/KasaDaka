@@ -5,7 +5,6 @@
 
 <menu id="main" dtmf ="true">
 	<prompt>
-	    <audio src ="intro.wav"/>
 		<audio src ="engLang.wav"/>
 		<audio src ="FrenchMenu.wav"/>
 	</prompt>       			
@@ -103,60 +102,38 @@
 	<choice dtmf="3" event="Fchoice" message="Theft" />
 </menu>
 
-
 <catch cond="true" event="choice">
 	<assign name="choice_user" expr="_message" />
-	<goto next="#record" />
+	<goto next="#fetch" />
 </catch>
 
 <catch cond="true" event="Fchoice">
 	<assign name="choice_user" expr="_message" />
-	<goto next="#Frecord" />
+	<goto next="#Ffetch" />
 </catch>
 
-
-<form id="record">
-	<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
-		<prompt bargein="false">
- 			<audio src="RAB.wav"/>
-		</prompt>	
-	</record>
-	<filled>
-		<prompt xml:lang="en-US"> <!-- Play the voiceMessage buffer -->
-			<!-- Your message was -->			
-			<audio expr="message"/>
-		</prompt>
-		<!-- <goto next="#main_menu"/> -->
-	</filled>	
-	<block>
+<form id="fetch">	
+	<block>		
 		<var name="language" expr="'english'" />
-		<log expr="'*****callerID-english=' + callerID + '*****'" />
-		<log expr="'*****language-english=' + language + '*****'" />
-		<log expr="'*****choice-of-user=' + choice_user + '*****'" />
-	    <submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language choice_user" />
+	    <submit next="index.php" enctype="multipart/form-data" method="get" namelist="language choice_user" /> 
 	</block>		
 </form>
 
-<form id="Frecord">
-	<record name="message" beep="true" maxtime="30s" finalsilence="5000ms" dtmfterm="true">
-		<prompt timeout="5s">
- 			<audio src="RecordMessageFrench.wav"/>
-		</prompt>
-		<noinput>
- 			<audio src="DidNotHearFrench.wav"/>
-		</noinput>			
-	</record>
-	<filled>
-		<prompt> <!-- Play the voiceMessage buffer -->
-			<!-- Your message was -->
-			<audio expr="message"/>
-		</prompt>
-		<!-- <goto next="#main_menu"/> -->
-	</filled>
+<form id="Ffetch">
 	<block>
 		<var name="language" expr="'french'" />
-		<log expr="'*****callerID-french=' + callerID + '*****'" />
-    	<submit next="index.php" enctype="multipart/form-data" method="post" namelist="message callerID language choice_user" />
+    	<submit next="index.php" enctype="multipart/form-data" method="get" namelist="language choice_user" />
 	</block>
 </form>
 </vxml>
+
+
+
+
+
+
+
+
+
+
+
