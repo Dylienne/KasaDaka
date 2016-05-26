@@ -46,13 +46,10 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	<block>
 		<prompt>
 			<audio src="presentImportantMessages.wav" />
-		</prompt>
-		<foreach item="path" array="<?php echo $arrayPaths ?>" >		
-			<log expr="'*****path=' + path + '*****'" />
-			<prompt>
+			<foreach item="path" array="<?php echo $arrayPaths ?>" >
 				<audio expr="path" />
-			</prompt>
-		</foreach>	
+			</foreach>
+		</prompt>
 		<goto next="proceedMain.vxml" />		
 	</block>
 </form>

@@ -40,15 +40,12 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 <vxml version = "2.1" >
 <form id="fetch">	
 	<block>
-		<foreach item="path" array="<?php echo $arrayPaths ?>" >
-			<log expr="'*****path=' + path + '*****'" />
-			<prompt>
+		<prompt>
+			<foreach item="path" array="<?php echo $arrayPaths ?>" >
 				<audio expr="path" />
-			</prompt>
-		</foreach>
-		
-		<audio src="thanksFrench.wav" />
-		
+			</foreach>
+			<audio src="thanksFrench.wav" />
+		</prompt>
 	</block>
 </form>
 </vxml>
