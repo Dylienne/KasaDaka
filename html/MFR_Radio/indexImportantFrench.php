@@ -1,22 +1,22 @@
 <?php
 
-if(file_exists('/tmp/request.log')){
-	unlink('/tmp/request.log');
+if(file_exists('/tmp/2request.log')){
+	unlink('/tmp/2request.log');
 }
-$fp = fopen('/tmp/request.log', 'a');
+$fp = fopen('/tmp/2request.log', 'a');
 
 $language = $_REQUEST['language'];
 fwrite($fp, "\nlanguage: $language");
 
-$choice = $_REQUEST['choice_user'];
-fwrite($fp, "\nchoice: $choice");	
+$priority = "Pesticides";
+fwrite($fp, "\npriority: $priority");	
 
 $path=__DIR__.'/../recordings';
 
-$array=glob("$path/*\_$choice\_$language\_*.wav");
+$array=glob("$path/*\_$priority\_$language\_*.wav");
 
 if(empty($array)){
-	fwrite($fp, "\nbig problem array empty"); 
+	fwrite($fp, "\nThe system did not found any file matching the pattern"); 
 }
 
 $arrayPaths="[";
@@ -40,15 +40,16 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 <vxml version = "2.1" >
 <form id="fetch">	
 	<block>
-		<foreach item="path" array="<?php echo $arrayPaths ?>" >
+		<prompt>
+			<audio src="presentImportantMessagesFrench.wav" />
+		</prompt>
+		<foreach item="path" array="<?php echo $arrayPaths ?>" >		
 			<log expr="'*****path=' + path + '*****'" />
 			<prompt>
 				<audio expr="path" />
 			</prompt>
-		</foreach>
-		
-		<audio src="thanks.wav" />
-		
+		</foreach>	
+		<goto next="proceedMainFrench.vxml" />		
 	</block>
 </form>
 </vxml>

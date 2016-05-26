@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" > 
+<var name="callerID" expr="session.callerid" />
+<var name="choice_user" />
+
+<menu id="main" dtmf="true">
+	<prompt>
+		<audio src="playMoreMessages.wav" />
+	</prompt>       			
+	<choice dtmf="9" next="#filter"/>
+</menu>
+
+<menu id="filter" dtmf="true">
+	<prompt>
+		<audio src="howToFilter.wav"/>
+		<audio src="date.wav" />
+		<audio src="category.wav" />
+		<audio src="topicid.wav" />
+	</prompt>
+	<choice dtmf="1" next="#date" />
+	<choice dtmf="2" next="#options" />
+	<choice dtmf="3" next="#topicid" />
+</menu>
+
+<menu id="options" dtmf="true">
+	<prompt>
+		<audio src ="FarmCrops.wav"/>
+		<audio src ="Cattles.wav"/>
+		<audio src ="HumanDestruction.wav"/>
+	</prompt>
+	<choice dtmf="1" next="#farming" />
+	<choice dtmf="2" next="#cattle" />
+	<choice dtmf="3" next="#human" />
+</menu>
+
+<menu id="farming" dtmf="true">
+	<prompt>
+		<audio src ="PoP.wav"/>
+		<audio src ="WC.wav"/>
+		<audio src ="ToP.wav"/>
+	</prompt>
+	<choice dtmf="1" event="choice" message="Pesticides" />
+	<choice dtmf="2" event="choice" message="WeatherConditions" />
+	<choice dtmf="3" event="choice" message="TipsOrRemarksFarming" />
+</menu>
+
+<menu id="cattle" dtmf="true">
+	<prompt>
+		<audio src ="2AnimalDisease.wav"/>
+		<audio src ="2HelpForAnimal.wav"/>
+		<audio src ="ToP.wav"/>
+	</prompt>	
+	<choice dtmf="1" event="choice" message="AnimalDisease" />
+	<choice dtmf="2" event="choice" message="AnimalHelp" />
+	<choice dtmf="3" event="choice" message="TipsOrRemarksCattle" />
+</menu>
+
+<menu id="human" dtmf="true">
+	<prompt>
+		<audio src ="DestrNat.wav"/>
+		<audio src ="violenceOrAbuse.wav"/>
+		<audio src ="theft.wav"/>		
+	</prompt>
+	<choice dtmf="1" event="choice" message="DestructionNatural" />
+	<choice dtmf="2" event="choice" message="ViolenceOrAbuse" />
+	<choice dtmf="3" event="choice" message="Theft" />
+</menu>
+
+<catch cond="true" event="choice">
+	<assign name="choice_user" expr="_message" />
+	<goto next="#fetch" />
+</catch>
+
+<form id="fetch">	
+	<block>		
+		<var name="language" expr="'english'" />
+	    <submit next="index.php" enctype="multipart/form-data" method="get" namelist="language choice_user" /> 
+	</block>		
+</form>
+
+<!--
+
+<form id="date">
+	<field name="input_date" type="digits?length=8>
+		<promtp>
+			<audio src=inputDate.wav" />
+		</promtp>
+	</field>
+	<block>		
+		<var name="language" expr="'english'" />
+	    <submit next="index.php" enctype="multipart/form-data" method="get" namelist="language input_date" /> 
+	</block>
+</form>
+
+<form id"topicid">
+	<field name="input_topicid" type="digits?length=3">
+		<promtp>
+			<audio src=inputTopicid.wav" />
+		</promtp>
+	</field>
+	<block>		
+		<var name="language" expr="'english'" />
+	    <submit next="index.php" enctype="multipart/form-data" method="get" namelist="language input_topicid" /> 
+	</block>
+</form>
+
+-->
+
+</vxml>

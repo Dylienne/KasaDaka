@@ -47,7 +47,7 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 			</prompt>
 		</foreach>
 		
-		<audio src="thanks.wav" />
+		<audio src="thanksFrench.wav" />
 		
 	</block>
 </form>
