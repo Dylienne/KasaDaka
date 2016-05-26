@@ -8,7 +8,11 @@ $fp = fopen('/tmp/2request.log', 'a');
 $language = $_REQUEST['language'];
 fwrite($fp, "\nlanguage: $language");
 
+
+/* Change only here the priority intended */
 $priority = "Pesticides";
+
+
 fwrite($fp, "\npriority: $priority");	
 
 $path=__DIR__.'/../recordings';
